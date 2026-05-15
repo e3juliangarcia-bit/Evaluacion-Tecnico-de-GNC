@@ -5,6 +5,10 @@ from fpdf import FPDF
 # --- CONFIGURACIÓN DE PÁGINA ---
 st.set_page_config(page_title="Sistema de Evaluación Técnica IMW", layout="wide")
 
+# --- INICIALIZACIÓN DE ESTADO DE BLOQUEO ---
+if 'bloqueado' not in st.session_state:
+    st.session_state.bloqueado = False
+
 # --- FUNCIÓN PARA GENERAR PDF ---
 class PDF(FPDF):
     def header(self):
@@ -43,7 +47,7 @@ def generar_pdf(nombre, supervisor, fecha, aciertos, total, porcentaje, status, 
     
     return pdf.output(dest='S').encode('latin-1')
 
-# --- BASE DE DATOS DE PREGUNTAS NUMERADAS ---
+# --- BASE DE DATOS DE PREGUNTAS ---
 preguntas_db = [
     {"id": 1, "p": "1. Durante el ensamble del conjunto bloque regulador de presión (bloque del filtro de aceite), ¿qué componente debe deslizar libremente antes de colocar el resorte?", "o": ["a) La válvula de retención", "b) El tapón NPT", "c) El pistón regulador", "d) El manómetro de presión"], "c": "c"},
     {"id": 2, "p": "2. Al armar la bomba de aceite, ¿cuál es el huelgo de rotación especificado entre los engranajes y el cuerpo?", "o": ["a) 0.008 a 0.009 pulgadas", "b) 0.003 a 0.004 pulgadas", "c) 0.0012 pulgadas", "d) 0.015 a 0.020 pulgadas"], "c": "b"},
@@ -95,51 +99,67 @@ preguntas_db = [
 # --- INTERFAZ ---
 with st.sidebar:
     st.header("Datos de Registro")
-    nombre = st.text_input("Nombre del Técnico:")
-    supervisor = st.selectbox("Supervisor Encargado:", ["Gerardo Lopez", "Eduardo Solano", "Joaquin Castillo", "Julian Garcia"])
-    fecha_eval = st.date_input("Fecha:", date.today())
+    # Los datos de registro también se bloquean
+    nombre = st.text_input("Nombre del Técnico:", disabled=st.session_state.bloqueado)
+    supervisor = st.selectbox("Supervisor Encargado:", ["Gerardo Lopez", "Eduardo Solano", "Joaquin Castillo", "Julian Garcia"], disabled=st.session_state.bloqueado)
+    fecha_eval = st.date_input("Fecha:", date.today(), disabled=st.session_state.bloqueado)
+    
+    if st.session_state.bloqueado:
+        if st.button("🔄 Nueva Evaluación (Reset)"):
+            st.session_state.bloqueado = False
+            st.rerun()
 
 st.title(f"📋 Evaluación Técnica IMW: {nombre if nombre else '---'}")
 st.subheader("Cuestionario de Conocimientos GNC e Instrumentación")
 
 respuestas_usuario = {}
 
-# Mostrar las 45 preguntas
+# Mostrar las 45 preguntas (Se bloquean si bloqueado == True)
 for item in preguntas_db:
     st.markdown(f"**{item['p']}**")
-    sel = st.radio("Seleccione la respuesta correcta:", item['o'], key=item['id'], index=None)
+    sel = st.radio("Seleccione la respuesta correcta:", item['o'], key=item['id'], index=None, disabled=st.session_state.bloqueado)
     if sel:
         respuestas_usuario[item['id']] = sel[0]
     st.write("---")
 
-# Sección de Análisis Abierto
+# Sección de Análisis Abierto (Se bloquea)
 st.header("II. Sección de Análisis Detallado")
-
 st.markdown("### 46. Función y Lógica del Panel de Prioridad")
-ans_46 = st.text_area("46. Describa detalladamente la función de un Panel de Prioridad en una estación de GNC de tres líneas y la lógica de flujo hacia los bancos (Bajo, Medio y Alto):")
+ans_46 = st.text_area("46. Describa detalladamente la función de un Panel de Prioridad...", disabled=st.session_state.bloqueado)
 
 st.markdown("---")
-
 st.markdown("### 47. Caso Práctico: Estación Obrera")
-st.info("""47. El jefe de turno de la estación Obrera reporta que el compresor está funcionando correctamente y alcanza su presión de paro nominal (3,600 PSI). Sin embargo, al observar los manómetros del almacenamiento, notas que el Banco de Baja y el Banco Medio están a su máxima capacidad, pero el Banco de Alta se ha quedado estancado en 2800 PSI y no sube, a pesar de que el compresor sigue operando. No se detectan fugas audibles en el panel.""")
-ans_47 = st.text_area("De acuerdo con la lógica de llenado de un panel de prioridad, ¿es este un comportamiento normal? Describa cuál es la causa probable de esta falla y qué componente específico revisaría:")
+st.info("""47. El jefe de turno de la estación Obrera reporta...""")
+ans_47 = st.text_area("De acuerdo con la lógica de llenado...", disabled=st.session_state.bloqueado)
 
-if st.button("Finalizar y Generar Reporte PDF"):
-    if not nombre:
-        st.error("Por favor, ingrese el nombre del técnico antes de finalizar.")
-    else:
-        aciertos = sum(1 for q in preguntas_db if q['id'] in respuestas_usuario and respuestas_usuario[q['id']] == q['c'])
-        total_preguntas = len(preguntas_db)
-        porcentaje = (aciertos / total_preguntas) * 100
-        
-        status = "REPROBADO"
-        if porcentaje >= 85: status = "EXCELENTE / APROBADO"
-        elif porcentaje >= 70: status = "APROBADO"
+# --- BOTÓN DE FINALIZAR ---
+if not st.session_state.bloqueado:
+    if st.button("Finalizar y Generar Reporte PDF"):
+        if not nombre:
+            st.error("Por favor, ingrese el nombre del técnico antes de finalizar.")
+        else:
+            # Bloquear la aplicación
+            st.session_state.bloqueado = True
+            st.rerun()
 
-        pdf_file = generar_pdf(nombre, supervisor, fecha_eval, aciertos, total_preguntas, porcentaje, status, ans_46, ans_47)
-        
-        st.success(f"Evaluación concluida. Puntaje: {porcentaje:.1f}%")
-        st.download_button(label="⬇️ Descargar Reporte Oficial (PDF)", 
-                           data=pdf_file, 
-                           file_name=f"Evaluacion_{nombre}.pdf", 
-                           mime="application/pdf")
+# --- MOSTRAR RESULTADOS Y BOTÓN DE DESCARGA (Solo después de bloquear) ---
+if st.session_state.bloqueado:
+    # Calcular calificación
+    aciertos = sum(1 for q in preguntas_db if q['id'] in respuestas_usuario and respuestas_usuario[q['id']] == q['c'])
+    total_preguntas = len(preguntas_db)
+    porcentaje = (aciertos / total_preguntas) * 100
+    
+    status = "REPROBADO"
+    if porcentaje >= 85: status = "EXCELENTE / APROBADO"
+    elif porcentaje >= 70: status = "APROBADO"
+
+    st.success(f"Evaluación concluida. Puntaje: {porcentaje:.1f}%")
+    st.info("⚠️ La evaluación ha sido bloqueada. No se pueden realizar más cambios.")
+
+    # Generar archivo PDF
+    pdf_file = generar_pdf(nombre, supervisor, fecha_eval, aciertos, total_preguntas, porcentaje, status, ans_46, ans_47)
+    
+    st.download_button(label="⬇️ Descargar Reporte Oficial (PDF)", 
+                       data=pdf_file, 
+                       file_name=f"Evaluacion_{nombre}.pdf", 
+                       mime="application/pdf")
