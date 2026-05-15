@@ -43,36 +43,36 @@ def generar_pdf(nombre, supervisor, fecha, aciertos, total, porcentaje, status, 
     
     return pdf.output(dest='S').encode('latin-1')
 
-# --- BASE DE DATOS DE PREGUNTAS (1 a 45) ---
+# --- BASE DE DATOS DE PREGUNTAS NUMERADAS ---
 preguntas_db = [
-    {"id": 1, "p": "Durante el ensamble del conjunto bloque regulador de presión (bloque del filtro de aceite), ¿qué componente debe deslizar libremente antes de colocar el resorte?", "o": ["a) La válvula de retención", "b) El tapón NPT", "c) El pistón regulador", "d) El manómetro de presión"], "c": "c"},
-    {"id": 2, "p": "Al armar la bomba de aceite, ¿cuál es el huelgo de rotación especificado entre los engranajes y el cuerpo?", "o": ["a) 0.008 a 0.009 pulgadas", "b) 0.003 a 0.004 pulgadas", "c) 0.0012 pulgadas", "d) 0.015 a 0.020 pulgadas"], "c": "b"},
-    {"id": 3, "p": "¿Qué compuesto debe aplicarse a las roscas de los espárragos de los cilindros antes de su instalación definitiva?", "o": ["a) Locktite rojo", "b) Glyptol", "c) Aceite 55", "d) Antiaferrante"], "c": "d"},
-    {"id": 4, "p": "En las bielas con lubricación interior, ¿cómo se asegura que el aceite llegue a la cruceta?", "o": ["a) Mediante salpicadura desde el cárter generada por el giro del cigüeñal", "b) A través de un conducto perforado en el cuerpo de la biela, buje y cruceta", "c) Por el sistema de tubería externa de lubricación, conectado desde el bloque regulador de presión de aceite hasta la guía", "d) A través del sello de aceite del seal carrier"], "c": "b"},
-    {"id": 5, "p": "¿Cuál es el torque final para los espárragos de la guía de cruceta?", "o": ["a) 97 lbsf-ft (13.82 kgrf-m)", "b) 150 lbsf-ft (20,73 kgrf-m)", "c) 200 lbsf-ft (27,64 kgrf-m)", "d) 80 lbsf-ft (11.06 kgrf-m)"], "c": "a"},
-    {"id": 6, "p": "Al ensamblar cilindros refrigerados por aire, ¿qué precaución se debe tener con las aletas de enfriamiento?", "o": ["a) Cubrirlas con una capa gruesa de Glyptol", "b) Asegurar que estén libres de pintura u obstrucciones", "c) Pintarlas de color negro brillante", "d) Lubricarlas con Aceite 55"], "c": "b"},
-    {"id": 7, "p": "En el sistema de válvulas concéntricas, ¿qué función cumple la junta de aluminio (gasket)?", "o": ["a) Proporcionar un sellado hermético por deformación controlada", "b) Actuar como un resorte de compensación", "c) Aislar eléctricamente la válvula del bloque", "d) Lubricar el asiento de la válvula"], "c": "a"},
-    {"id": 8, "p": "¿Qué herramienta se utiliza para verificar que el cigüeñal no tenga huelgo axial excesivo?", "o": ["a) Cinta métrica", "b) Torquímetro", "c) Calibre (Pie de rey) estándar", "d) Comparador de caratula"], "c": "d"},
-    {"id": 9, "p": "Durante el montaje de los rodamientos del cigüeñal, ¿por qué no se debe usar llama directa para calentarlos?", "o": ["a) Porque la llama consume el oxígeno necesario causando corrosión", "b) Porque puede alterar el tratamiento térmico del acero", "c) Porque se generan grietas en las crestas del engranaje", "d) Porque dilata el eje en lugar del rodamiento"], "c": "b"},
-    {"id": 10, "p": "¿Cuál es la función de los 'shims' en la instalación del cigüeñal en el bloque del cárter?", "o": ["a) Aumentar la presión de aceite", "b) Sellar fugas de aceite externas", "c) Ajustar el huelgo axial total del cigüeñal", "d) Reducir la vibración del motor"], "c": "c"},
-    {"id": 11, "p": "Al instalar los anillos en el pistón, ¿cómo deben quedar posicionadas las aperturas?", "o": ["a) Todas alineadas en una sola línea vertical", "b) Escalonadas (no alineadas entre sí)", "c) Alineadas con el perno del pistón", "d) Cerradas completamente mediante pega loca"], "c": "b"},
-    {"id": 12, "p": "En el ensamblado del manifold (porta válvulas), ¿qué se debe verificar en las superficies de contacto?", "o": ["a) Que tengan un acabado rugoso para evitar el deslizamiento", "b) Que estén cubiertas de una capa de pintura especifica", "c) Planicidad y ausencia de rayas profundas", "d) Que estén lubricadas con grasa de litio"], "c": "c"},
-    {"id": 13, "p": "¿Para qué sirve el bulón perforado en el conjunto de la biela?", "o": ["a) Para reducir el peso total del conjunto", "b) Para medir la temperatura interna del aceite", "c) Para ventilar los gases del cárter", "d) Para permitir el paso de aceite hacia el perno de la biela"], "c": "d"},
-    {"id": 14, "p": "Al montar la tapa ciega del cárter, ¿cuál es el torque especificado para sus tornillos?", "o": ["a) 150 lbsf-ft (20.73 kgrf-m)", "b) 200 lbsf-ft (27.64 kgrf-m)", "c) 100 lbsf-ft (13.82 kgrf-m)", "d) 50 lbsf-ft (6.91 kgrf-m)"], "c": "a"},
-    {"id": 15, "p": "¿Qué se debe usar para limpiar los componentes del compresor antes del armado final?", "o": ["a) Agua jabonosa", "b) Solventes limpios", "c) Gasolina con plomo", "d) Aire a presión solamente"], "c": "b"},
+    {"id": 1, "p": "1. Durante el ensamble del conjunto bloque regulador de presión (bloque del filtro de aceite), ¿qué componente debe deslizar libremente antes de colocar el resorte?", "o": ["a) La válvula de retención", "b) El tapón NPT", "c) El pistón regulador", "d) El manómetro de presión"], "c": "c"},
+    {"id": 2, "p": "2. Al armar la bomba de aceite, ¿cuál es el huelgo de rotación especificado entre los engranajes y el cuerpo?", "o": ["a) 0.008 a 0.009 pulgadas", "b) 0.003 a 0.004 pulgadas", "c) 0.0012 pulgadas", "d) 0.015 a 0.020 pulgadas"], "c": "b"},
+    {"id": 3, "p": "3. ¿Qué compuesto debe aplicarse a las roscas de los espárragos de los cilindros antes de su instalación definitiva?", "o": ["a) Locktite rojo", "b) Glyptol", "c) Aceite 55", "d) Antiaferrante"], "c": "d"},
+    {"id": 4, "p": "4. En las bielas con lubricación interior, ¿cómo se asegura que el aceite llegue a la cruceta?", "o": ["a) Mediante salpicadura desde el cárter generada por el giro del cigüeñal", "b) A través de un conducto perforado en el cuerpo de la biela, buje y cruceta", "c) Por el sistema de tubería externa de lubricación, conectado desde el bloque regulador de presión de aceite hasta la guía", "d) A través del sello de aceite del seal carrier"], "c": "b"},
+    {"id": 5, "p": "5. ¿Cuál es el torque final para los espárragos de la guía de cruceta?", "o": ["a) 97 lbsf-ft (13.82 kgrf-m)", "b) 150 lbsf-ft (20,73 kgrf-m)", "c) 200 lbsf-ft (27,64 kgrf-m)", "d) 80 lbsf-ft (11.06 kgrf-m)"], "c": "a"},
+    {"id": 6, "p": "6. Al ensamblar cilindros refrigerados por aire, ¿qué precaución se debe tener con las aletas de enfriamiento?", "o": ["a) Cubrirlas con una capa gruesa de Glyptol", "b) Asegurar que estén libres de pintura u obstrucciones", "c) Pintarlas de color negro brillante", "d) Lubricarlas con Aceite 55"], "c": "b"},
+    {"id": 7, "p": "7. En el sistema de válvulas concéntricas, ¿qué función cumple la junta de aluminio (gasket)?", "o": ["a) Proporcionar un sellado hermético por deformación controlada", "b) Actuar como un resorte de compensación", "c) Aislar eléctricamente la válvula del bloque", "d) Lubricar el asiento de la válvula"], "c": "a"},
+    {"id": 8, "p": "8. ¿Qué herramienta se utiliza para verificar que el cigüeñal no tenga huelgo axial excesivo?", "o": ["a) Cinta métrica", "b) Torquímetro", "c) Calibre (Pie de rey) estándar", "d) Comparador de caratula"], "c": "d"},
+    {"id": 9, "p": "9. Durante el montaje de los rodamientos del cigüeñal, ¿por qué no se debe usar llama directa para calentarlos?", "o": ["a) Porque la llama consume el oxígeno necesario causando corrosión", "b) Porque puede alterar el tratamiento térmico del acero", "c) Porque se generan grietas en las crestas del engranaje", "d) Porque dilata el eje en lugar del rodamiento"], "c": "b"},
+    {"id": 10, "p": "10. ¿Cuál es la función de los 'shims' en la instalación del cigüeñal en el bloque del cárter?", "o": ["a) Aumentar la presión de aceite", "b) Sellar fugas de aceite externas", "c) Ajustar el huelgo axial total del cigüeñal", "d) Reducir la vibración del motor"], "c": "c"},
+    {"id": 11, "p": "11. Al instalar los anillos en el pistón, ¿cómo deben quedar posicionadas las aperturas?", "o": ["a) Todas alineadas en una sola línea vertical", "b) Escalonadas (no alineadas entre sí)", "c) Alineadas con el perno del pistón", "d) Cerradas completamente mediante pega loca"], "c": "b"},
+    {"id": 12, "p": "12. En el ensamblado del manifold (porta válvulas), ¿qué se debe verificar en las superficies de contacto?", "o": ["a) Que tengan un acabado rugoso para evitar el deslizamiento", "b) Que estén cubiertas de una capa de pintura especifica", "c) Planicidad y ausencia de rayas profundas", "d) Que estén lubricadas con grasa de litio"], "c": "c"},
+    {"id": 13, "p": "13. ¿Para qué sirve el bulón perforado en el conjunto de la biela?", "o": ["a) Para reducir el peso total del conjunto", "b) Para medir la temperatura interna del aceite", "c) Para ventilar los gases del cárter", "d) Para permitir el paso de aceite hacia el perno de la biela"], "c": "d"},
+    {"id": 14, "p": "14. Al montar la tapa ciega del cárter, ¿cuál es el torque especificado para sus tornillos?", "o": ["a) 150 lbsf-ft (20.73 kgrf-m)", "b) 200 lbsf-ft (27.64 kgrf-m)", "c) 100 lbsf-ft (13.82 kgrf-m)", "d) 50 lbsf-ft (6.91 kgrf-m)"], "c": "a"},
+    {"id": 15, "p": "15. ¿Qué se debe usar para limpiar los componentes del compresor antes del armado final?", "o": ["a) Agua jabonosa", "b) Solventes limpios", "c) Gasolina con plomo", "d) Aire a presión solamente"], "c": "b"},
     {"id": 16, "p": "16. Si los engranajes de la bomba de aceite no giran suavemente a mano, ¿qué se debe hacer?", "o": ["a) Aplicar lubricante WD-40 y forzarlos con una llave hasta que cedan", "b) Llenar la bomba con grasa pesada", "c) Desarmar y verificar interferencias o suciedad", "d) Aplicar calor para dilatar el cuerpo"], "c": "c"},
-    {"id": 17, "p": "¿Qué se toma como referencia para la correcta posición de los sellos de la caja de empaquetadura (seal Carrier)?", "o": ["a) Por la posición y forma del resorte", "b) Por el peso de la pieza", "c) Por una flecha pintada con marcador", "d) Por las letras grabadas en el sello"], "c": "d"},
-    {"id": 18, "p": "¿Qué pintura para recubrimiento de las paredes internas del cárter recomienda usar IMW en los equipos?", "o": ["a) Rust-Oleum", "b) Behr Premium", "c) Glyptol", "d) Sayer"], "c": "c"},
-    {"id": 19, "p": "¿A qué huelgo de dilatación debe llegar el engranaje de la bomba de aceite, con respecto al diámetro de muñón del cigüeñal, antes de ser instalado?", "o": ["a) 0.0012 pulgadas (0,03 mm)", "b) 0.008 pulgadas (0.203 mm)", "c) 0.003 pulgadas (0,075 mm)", "d) 0.005 pulgadas (0,127 mm)"], "c": "c"},
+    {"id": 17, "p": "17. ¿Qué se toma como referencia para la correcta posición de los sellos de la caja de empaquetadura (seal Carrier)?", "o": ["a) Por la posición y forma del resorte", "b) Por el peso de la pieza", "c) Por una flecha pintada con marcador", "d) Por las letras grabadas en el sello"], "c": "d"},
+    {"id": 18, "p": "18. ¿Qué pintura para recubrimiento de las paredes internas del cárter recomienda usar IMW en los equipos?", "o": ["a) Rust-Oleum", "b) Behr Premium", "c) Glyptol", "d) Sayer"], "c": "c"},
+    {"id": 19, "p": "19. ¿A qué huelgo de dilatación debe llegar el engranaje de la bomba de aceite, con respecto al diámetro de muñón del cigüeñal, antes de ser instalado?", "o": ["a) 0.0012 pulgadas (0,03 mm)", "b) 0.008 pulgadas (0.203 mm)", "c) 0.003 pulgadas (0,075 mm)", "d) 0.005 pulgadas (0,127 mm)"], "c": "c"},
     {"id": 20, "p": "20. ¿Hacia dónde debe orientarse el chanfle del engranaje de la bomba de lubricación?", "o": ["a) Hacia el extremo exterior del cigüeñal", "b) Hacia la bomba de aceite", "c) Hacia el lado del contrapeso", "d) Es indiferente"], "c": "c"},
     {"id": 21, "p": "21. Durante el ajuste del huelgo total del cigüeñal, ¿cuál es el rango aceptable?", "o": ["a) 0.003 a 0.004 pulgadas", "b) 0.008 a 0.009 pulgadas", "c) 0.005 a 0.007 pulgadas", "d) 0.010 a 0.012 pulgadas"], "c": "b"},
-    {"id": 22, "p": "¿Qué lubricante se recomienda para los O-rings?", "o": ["a) Grasa de litio", "b) Lubricante 55", "c) Antiaferrante", "d) Pasta para roscas"], "c": "b"},
-    {"id": 23, "p": "¿Cuál es el torque de apriete requerido para los tornillos de las bielas?", "o": ["a) 150 lbsf-ft (20.73 kgrf-m)", "b) 80 lbsf-ft (11 kgrf-m)", "c) 100 lbsf-ft (13,82 kgrf-m)", "d) 200 lbsf-ft (27.64 kgrf-m)"], "c": "c"},
-    {"id": 24, "p": "En la caja de sellos, ¿hacia dónde deben apuntar las letras grabadas?", "o": ["a) Hacia el cigüeñal", "b) Hacia el operario", "c) Hacia abajo para drenaje", "d) Hacia el lado de la presión (lejos del block)"], "c": "d"},
-    {"id": 25, "p": "Al montar las guías de cruceta, ¿dónde debe quedar el agujero de drenaje?", "o": ["a) Hacia arriba", "b) Hacia abajo", "c) Hacia la bomba de aceite", "d) Hacia el manifold"], "c": "b"},
-    {"id": 26, "p": "¿Cuál es la tolerancia de huelgo requerida entre la cruceta y su guía?", "o": ["a) 0.001 pulgadas", "b) 0.008 pulgadas", "c) 0.005 pulgadas", "d) 0.003 pulgadas"], "c": "c"},
-    {"id": 27, "p": "Para los tapones NPT ubicados en el cárter, ¿qué material de sellado se usa?", "o": ["a) Cinta de Teflón", "b) Lock-tite verde", "c) Pasta para roscas", "d) Grasa Molikote"], "c": "c"},
-    {"id": 28, "p": "¿Cuál es el propósito de pintar las paredes internas del cárter?", "o": ["a) Mejorar la disipación de calor", "b) Sellar grietas estructurales", "c) Evitar que partículas de la fundición se desprendan", "d) Facilitar el flujo de aceite"], "c": "c"},
+    {"id": 22, "p": "22. ¿Qué lubricante se recomienda para los O-rings?", "o": ["a) Grasa de litio", "b) Lubricante 55", "c) Antiaferrante", "d) Pasta para roscas"], "c": "b"},
+    {"id": 23, "p": "23. ¿Cuál es el torque de apriete requerido para los tornillos de las bielas?", "o": ["a) 150 lbsf-ft (20.73 kgrf-m)", "b) 80 lbsf-ft (11 kgrf-m)", "c) 100 lbsf-ft (13,82 kgrf-m)", "d) 200 lbsf-ft (27.64 kgrf-m)"], "c": "c"},
+    {"id": 24, "p": "24. En la caja de sellos, ¿hacia dónde deben apuntar las letras grabadas?", "o": ["a) Hacia el cigüeñal", "b) Hacia el operario", "c) Hacia abajo para drenaje", "d) Hacia el lado de la presión (lejos del block)"], "c": "d"},
+    {"id": 25, "p": "25. Al montar las guías de cruceta, ¿dónde debe quedar el agujero de drenaje?", "o": ["a) Hacia arriba", "b) Hacia abajo", "c) Hacia la bomba de aceite", "d) Hacia el manifold"], "c": "b"},
+    {"id": 26, "p": "26. ¿Cuál es la tolerancia de huelgo requerida entre la cruceta y su guía?", "o": ["a) 0.001 pulgadas", "b) 0.008 pulgadas", "c) 0.005 pulgadas", "d) 0.003 pulgadas"], "c": "c"},
+    {"id": 27, "p": "27. Para los tapones NPT ubicados en el cárter, ¿qué material de sellado se usa?", "o": ["a) Cinta de Teflón", "b) Lock-tite verde", "c) Pasta para roscas", "d) Grasa Molikote"], "c": "c"},
+    {"id": 28, "p": "28. ¿Cuál es el propósito de pintar las paredes internas del cárter?", "o": ["a) Mejorar la disipación de calor", "b) Sellar grietas estructurales", "c) Evitar que partículas de la fundición se desprendan", "d) Facilitar el flujo de aceite"], "c": "c"},
     {"id": 29, "p": "29. Se está realizando el diagnóstico de un lazo de control de un transductor de presión que opera con una señal de 4 - 20 mA. Para medir la caída de tensión y verificar la señal con un multímetro, se utiliza una resistencia de precisión de 250 Ohm en el lazo. Si el multímetro conectado en paralelo a la resistencia de 250 Ohm marca una lectura de 3.5 V, ¿cuál es la intensidad de corriente que circula por el lazo en ese momento?", "o": ["a) 10 mA", "b) 12 mA", "c) 14 mA", "d) 16 mA"], "c": "c"},
     {"id": 30, "p": "30. ¿En el sistema de control de los equipos IMW, qué tipo de circuito eléctrico, es un circuito de paros de emergencia?", "o": ["a) Circuito serie.", "b) Circuito paralelo.", "c) Circuito mixto.", "d) Todas las anteriores."], "c": "a"},
     {"id": 31, "p": "31. Para diagnosticar una falla en un circuito de paros de emergencia, cuales de las siguientes herramientas son útiles para tal propósito:", "o": ["a) Amperímetro y caza fallas.", "b) Multímetro y manual eléctrico de equipo.", "c) Óhmetro y manual eléctrico de equipo.", "d) Todas las anteriores."], "c": "b"},
@@ -106,7 +106,7 @@ respuestas_usuario = {}
 
 # Mostrar las 45 preguntas
 for item in preguntas_db:
-    st.markdown(f"### {item['p']}")
+    st.markdown(f"**{item['p']}**")
     sel = st.radio("Seleccione la respuesta correcta:", item['o'], key=item['id'], index=None)
     if sel:
         respuestas_usuario[item['id']] = sel[0]
@@ -116,19 +116,18 @@ for item in preguntas_db:
 st.header("II. Sección de Análisis Detallado")
 
 st.markdown("### 46. Función y Lógica del Panel de Prioridad")
-ans_46 = st.text_area("Describa detalladamente la función de un Panel de Prioridad en una estación de GNC de tres líneas y la lógica de flujo hacia los bancos (Bajo, Medio y Alto):")
+ans_46 = st.text_area("46. Describa detalladamente la función de un Panel de Prioridad en una estación de GNC de tres líneas y la lógica de flujo hacia los bancos (Bajo, Medio y Alto):")
 
 st.markdown("---")
 
 st.markdown("### 47. Caso Práctico: Estación Obrera")
-st.info("""El compresor alcanza su presión de paro nominal (3,600 PSI). Los Bancos de Baja y Medio están llenos, pero el Banco de Alta se quedó estancado en 2800 PSI y no sube. No hay fugas audibles.""")
-ans_47 = st.text_area("¿Es este un comportamiento normal? Describa la causa probable y qué componente específico revisaría:")
+st.info("""47. El jefe de turno de la estación Obrera reporta que el compresor está funcionando correctamente y alcanza su presión de paro nominal (3,600 PSI). Sin embargo, al observar los manómetros del almacenamiento, notas que el Banco de Baja y el Banco Medio están a su máxima capacidad, pero el Banco de Alta se ha quedado estancado en 2800 PSI y no sube, a pesar de que el compresor sigue operando. No se detectan fugas audibles en el panel.""")
+ans_47 = st.text_area("De acuerdo con la lógica de llenado de un panel de prioridad, ¿es este un comportamiento normal? Describa cuál es la causa probable de esta falla y qué componente específico revisaría:")
 
 if st.button("Finalizar y Generar Reporte PDF"):
     if not nombre:
         st.error("Por favor, ingrese el nombre del técnico antes de finalizar.")
     else:
-        # Calcular calificación
         aciertos = sum(1 for q in preguntas_db if q['id'] in respuestas_usuario and respuestas_usuario[q['id']] == q['c'])
         total_preguntas = len(preguntas_db)
         porcentaje = (aciertos / total_preguntas) * 100
@@ -137,7 +136,6 @@ if st.button("Finalizar y Generar Reporte PDF"):
         if porcentaje >= 85: status = "EXCELENTE / APROBADO"
         elif porcentaje >= 70: status = "APROBADO"
 
-        # Generar archivo PDF
         pdf_file = generar_pdf(nombre, supervisor, fecha_eval, aciertos, total_preguntas, porcentaje, status, ans_46, ans_47)
         
         st.success(f"Evaluación concluida. Puntaje: {porcentaje:.1f}%")
